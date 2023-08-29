@@ -1,0 +1,16 @@
+.label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input {
+  padding: 5px;
+  overflow: hidden;
+  border: 3px solid black;
+  border-radius: 20px;
+}
+
+.input:hover,
+.input:focus {
+  outline: 1px solid #000;
+}

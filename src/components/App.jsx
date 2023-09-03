@@ -1,31 +1,68 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/operations';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
-import css from './App.module.css';
-import { selectFilteredContacts } from 'redux/selectors';
+import { useEffect, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { fetchGetUser, fetchLogout } from 'redux/fetchUser';
+import { fetchContacts } from 'redux/fetchContacts';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
+import SharedLayout from 'pages/SharedLayout';
+
+const Login = lazy(() => import('../pages/Login'));
+const Register = lazy(() => import('../pages/Register'));
+const Contacts = lazy(() => import('../pages/Contacts'));
 
 export function App() {
   const dispatch = useDispatch();
-  const filteredContacts = useSelector(selectFilteredContacts);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    async function fetchData() {
+      try {
+        await dispatch(fetchGetUser()).unwrap();
+        await dispatch(fetchContacts());
+      } catch (error) {
+        dispatch(fetchLogout());
+      }
+    }
+
+    fetchData();
   }, [dispatch]);
 
   return (
-    <div className={css.container}>
+    <>
       <ToastContainer autoClose={2000} hideProgressBar={true} />
-      <h1 className={css.main_title}>Phonebook</h1>
-      <ContactForm />
 
-      <h2 className={css.title}>Contacts ({filteredContacts.length})</h2>
-      <Filter />
-      <ContactList />
-    </div>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <Contacts />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }

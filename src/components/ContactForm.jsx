@@ -16,16 +16,20 @@ export function ContactForm() {
     const newName = form.elements.name.value;
     const newPhone = form.elements.phone.value;
 
-    if (contacts.find(({ name }) => name === newName)) {
+    if (
+      contacts.find(({ name }) => name.toLowerCase() === newName.toLowerCase())
+    ) {
       toast.info(`${newName} is already in contacts`);
-    } else {
-      dispatch(addContact({ name: newName, number: newPhone }))
-        .unwrap()
-        .then(() => toast.success(`${newName} successfully added!`))
-        .catch(() =>
-          toast.error(`Something went wrong, ${newName} not added. Try again.`)
-        );
+      form.reset();
+      return; // Додайте return тут, щоб вийти з функції
     }
+
+    dispatch(addContact({ name: newName, number: newPhone }))
+      .unwrap()
+      .then(() => toast.success(`${newName} successfully added!`))
+      .catch(() =>
+        toast.error(`Something went wrong, ${newName} not added. Try again.`)
+      );
 
     form.reset();
   };

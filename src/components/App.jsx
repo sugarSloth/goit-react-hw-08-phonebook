@@ -3,9 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchGetUser, fetchLogout } from 'redux/fetchUser';
-import { fetchContacts } from 'redux/fetchContacts';
-import PublicRoute from './PublicRoute';
+import { refreshUser } from 'redux/operations';
+import { PublicRoute } from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import SharedLayout from 'pages/SharedLayout';
 
@@ -17,16 +16,7 @@ export function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        await dispatch(fetchGetUser()).unwrap();
-        await dispatch(fetchContacts());
-      } catch (error) {
-        dispatch(fetchLogout());
-      }
-    }
-
-    fetchData();
+    dispatch(refreshUser);
   }, [dispatch]);
 
   return (

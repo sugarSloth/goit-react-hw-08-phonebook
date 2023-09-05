@@ -10,8 +10,8 @@ import {
 } from '@chakra-ui/react';
 import FormInput from './FormInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentContact } from 'redux/selectors';
-import { editContact } from 'redux/fetchContacts';
+import { selectCurrentContact } from 'redux/contacts/selectors';
+import { editContact } from 'redux/contacts/operations';
 import { toast } from 'react-toastify';
 
 const inputStyles = {

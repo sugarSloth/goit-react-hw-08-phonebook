@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/fetchContacts';
-import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
 import Form from 'components/Form';
 import FormInput from 'components/FormInput';
 import { Container } from '@chakra-ui/react';
@@ -21,7 +21,6 @@ export function ContactForm() {
     ) {
       toast.info(`${newName} is already in contacts`);
       form.reset();
-      return; // Додайте return тут, щоб вийти з функції
     }
 
     dispatch(addContact({ name: newName, number: newPhone }))

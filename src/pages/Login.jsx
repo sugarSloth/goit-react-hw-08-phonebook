@@ -3,7 +3,7 @@ import FormInput from 'components/FormInput';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { fetchLogin } from 'redux/fetchUser';
+import { fetchLogin } from 'redux/auth/operations';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const Login = () => {
     const form = event.target;
     const email = form.elements.email.value;
     const password = form.elements.password.value;
-
     const userLoginInfo = { email, password };
 
     dispatch(fetchLogin(userLoginInfo))

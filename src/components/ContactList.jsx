@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { deleteContact, fetchContacts } from 'redux/fetchContacts';
+import { deleteContact, fetchContacts } from 'redux/contacts/operations';
 import {
   selectContacts,
   selectError,
   selectFilteredContacts,
   selectIsLoading,
-} from 'redux/selectors';
+} from 'redux/contacts/selectors';
 import ContactListItem from 'components/ContactListItem';
 import { Container, List, Text } from '@chakra-ui/react';
 import Loader from './Loader';
@@ -37,14 +37,15 @@ export function ContactList({ onOpen }) {
       return <Loader />;
     } else if (error) {
       return <Text>{error}</Text>;
-    } else if (filteredContacts.length === 0 && contacts.length !== 0) {
-      return <Text>No matches found</Text>;
     } else if (!isLoading && !error && contacts.length === 0) {
       return <Text>You don't have contacts yet</Text>;
     } else {
+      let contactsToDisplay =
+        filteredContacts.length > 0 ? filteredContacts : contacts;
+
       return (
         <List>
-          {filteredContacts.map(({ id, name, number }) => (
+          {contactsToDisplay.map(({ id, name, number }) => (
             <ContactListItem
               key={id}
               handleDeleteButton={handleDeleteButton}

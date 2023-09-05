@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { refreshUser } from 'redux/operations';
+import { refreshUser } from 'redux/auth/operations';
 import { PublicRoute } from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import SharedLayout from 'pages/SharedLayout';

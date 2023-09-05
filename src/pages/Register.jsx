@@ -3,7 +3,7 @@ import FormInput from 'components/FormInput';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { fetchSignup } from 'redux/fetchUser';
+import { fetchSignup } from 'redux/auth/operations';
 
 const Register = () => {
   const dispatch = useDispatch();

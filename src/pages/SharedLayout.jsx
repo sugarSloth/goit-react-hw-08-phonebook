@@ -10,8 +10,8 @@ import { AtSignIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { fetchLogout } from 'redux/fetchUser';
-import { selectToken, selectUserEmail } from 'redux/selectors';
+import { fetchLogout } from 'redux/auth/operations';
+import { selectToken, selectUserEmail } from 'redux/auth/selectors';
 
 const buttonStyles = {
   color: 'white',

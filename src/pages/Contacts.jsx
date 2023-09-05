@@ -1,7 +1,7 @@
 import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
-import { selectFilteredContacts } from 'redux/selectors';
+import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { useSelector } from 'react-redux';
 import { Heading, useDisclosure } from '@chakra-ui/react';
 import ContactModal from 'components/ContactModal';

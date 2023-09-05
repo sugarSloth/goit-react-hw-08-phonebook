@@ -4,7 +4,7 @@ import {
   addContact,
   deleteContact,
   editContact,
-} from './fetchContacts';
+} from '../contacts/operations';
 
 const initialState = {
   items: [],
@@ -12,6 +12,19 @@ const initialState = {
   error: null,
   currentContact: {},
 };
+
+const filterSlice = createSlice({
+  name: 'filter',
+  initialState,
+  reducers: {
+    filterContacts(state, { payload }) {
+      state.value = payload;
+    },
+  },
+});
+
+export const { filterContacts } = filterSlice.actions;
+export const filterReducer = filterSlice.reducer;
 
 const contactsSlice = createSlice({
   name: 'contacts',

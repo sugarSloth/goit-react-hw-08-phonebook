@@ -1,7 +1,7 @@
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { IconButton, ListItem } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { setCurrentContact } from 'redux/contactsSlice';
+import { setCurrentContact } from 'redux/contacts/slice';
 
 const ContactListItem = ({ id, name, number, handleDeleteButton, onOpen }) => {
   const dispatch = useDispatch();

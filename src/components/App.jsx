@@ -1,5 +1,5 @@
-import { useEffect, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,12 +15,14 @@ const Contacts = lazy(() => import('../pages/Contacts'));
 export function App() {
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(refreshUser);
-  }, [dispatch]);
+    dispatch(refreshUser());
+  }, [dispatch, navigate]);
 
   return (
-    <>
+    <Suspense fallback={<div />}>
       <ToastContainer autoClose={2000} hideProgressBar={true} />
 
       <Routes>
@@ -53,6 +55,6 @@ export function App() {
           />
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 }

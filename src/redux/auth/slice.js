@@ -39,6 +39,9 @@ const userSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
         // state.token = '';
         state.user = payload;
+      })
+      .addCase(refreshUser.rejected, (state, { payload }) => {
+        state.token = '';
       });
   },
 });

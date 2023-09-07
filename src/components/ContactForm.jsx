@@ -21,16 +21,16 @@ export function ContactForm() {
     ) {
       toast.info(`${newName} is already in contacts`);
       form.reset();
+    } else {
+      dispatch(addContact({ name: newName, number: newPhone }))
+        .unwrap()
+        .then(() => toast.success(`${newName} successfully added!`))
+        .catch(() =>
+          toast.error(`Something went wrong, ${newName} not added. Try again.`)
+        );
+
+      form.reset();
     }
-
-    dispatch(addContact({ name: newName, number: newPhone }))
-      .unwrap()
-      .then(() => toast.success(`${newName} successfully added!`))
-      .catch(() =>
-        toast.error(`Something went wrong, ${newName} not added. Try again.`)
-      );
-
-    form.reset();
   };
 
   return (
